@@ -1,0 +1,249 @@
+/* main launcher (drun/run/filebrowser/window) */
+@import "shared-colors.rasi"
+
+configuration {
+    modi:                       "drun,run,filebrowser,window";
+    show-icons:                 true;
+    display-drun:               "APPS";
+    display-run:                "RUN";
+    display-filebrowser:        "FILES";
+    display-window:             "WINDOW";
+    drun-display-format:        "{name}";
+    window-format:              "{w} · {c} · {t}";
+
+    /* clear conflicting defaults */
+    kb-mode-complete:           "";          /* was Control+l            */
+    kb-remove-to-eol:           "";          /* was Control+k            */
+    kb-remove-to-sol:           "";          /* was Control+u            */
+    kb-element-next:            "";          /* was Tab                  */
+    kb-element-prev:            "";          /* was ISO_Left_Tab         */
+    kb-row-tab:                 "";          /* keep Tab single-purpose  */
+
+    /* vim-like bindings */
+    kb-row-up:                  "Up,Control+p,Control+k";
+    kb-row-down:                "Down,Control+n,Control+j";
+    kb-row-left:                "Control+h";
+    kb-row-right:               "Control+l";
+    kb-page-prev:               "Page_Up,Control+u";
+    kb-page-next:               "Page_Down,Control+d";
+    kb-row-first:               "Home";
+    kb-row-last:                "End,Shift+g";
+    kb-mode-next:               "Tab,Control+Tab,Shift+Right";
+    kb-mode-previous:           "ISO_Left_Tab,Control+ISO_Left_Tab,Shift+Left";
+    kb-accept-entry:            "Return,KP_Enter,Control+m";
+    kb-remove-char-back:        "BackSpace,Shift+BackSpace";
+    kb-remove-char-forward:     "Delete";
+    kb-cancel:                  "Escape,Control+bracketleft";
+    kb-clear-line:              "Control+w";
+}
+
+* {
+    font:                        "JetBrains Mono Nerd Font 10";
+}
+
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       1000px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    enabled:                     true;
+    border:                      2px solid;
+    border-color:                @accent-dim;
+    border-radius:               18px;
+    cursor:                      "default";
+    background-color:            @bg-0;
+}
+
+mainbox {
+    enabled:                     true;
+    spacing:                     0px;
+    background-color:            transparent;
+    orientation:                 horizontal;
+    children:                    [ "imagebox", "listbox" ];
+}
+
+imagebox {
+    padding:                     22px;
+    background-color:            transparent;
+
+    /* most probably will have to update / improve to something better */
+    background-image:            url("~/.config/rofi/images/portal.png", height);
+    orientation:                 vertical;
+    children:                    [ "inputbar", "dummy", "mode-switcher" ];
+}
+
+listbox {
+    spacing:                     18px;
+    padding:                     22px;
+    background-color:            @bg-1;
+    orientation:                 vertical;
+    children:                    [ "message", "listview" ];
+}
+
+dummy {
+    background-color:            transparent;
+}
+
+inputbar {
+    enabled:                     true;
+    spacing:                     12px;
+    padding:                     15px 18px;
+    border:                      1px solid;
+    border-color:                @bg-3;
+    border-radius:               12px;
+    background-color:            @bg-2;
+    text-color:                  @fg;
+    children:                    [ "textbox-prompt-colon", "entry" ];
+}
+
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "";
+    font:                        "JetBrains Mono Nerd Font 12";
+    background-color:            inherit;
+    text-color:                  @accent;
+}
+
+entry {
+    enabled:                     true;
+    background-color:            inherit;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Search";
+    placeholder-color:           @fg-dim;
+}
+
+mode-switcher{
+    enabled:                     true;
+    spacing:                     14px;
+    background-color:            transparent;
+    text-color:                  @fg;
+}
+
+button {
+    padding:                     14px;
+    border:                      1px solid;
+    border-color:                @bg-3;
+    border-radius:               12px;
+    background-color:            @bg-2;
+    text-color:                  @fg-dim;
+    cursor:                      pointer;
+}
+
+button selected {
+    background-color:            @accent;
+    border-color:                @accent;
+    text-color:                  @on-accent;
+}
+
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       8;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   true;
+    scrollbar-width:             6px;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    spacing:                     8px;
+    background-color:            transparent;
+    text-color:                  @fg;
+    cursor:                      "default";
+}
+
+scrollbar {
+    background-color:            @bg-2;
+    handle-color:                @accent-dim;
+    handle-width:                6px;
+    handle-rounded-corners:      true;
+    border-radius:               10px;
+}
+
+element {
+    enabled:                     true;
+    spacing:                     14px;
+    padding:                     9px 12px;
+    border:                      0px solid;
+    border-radius:               10px;
+    background-color:            transparent;
+    text-color:                  @fg;
+    cursor:                      pointer;
+}
+
+element normal.normal {
+    background-color:            transparent;
+    text-color:                  @fg;
+}
+
+element normal.urgent {
+    background-color:            @urgent;
+    text-color:                  @fg;
+}
+
+element normal.active {
+    background-color:            transparent;
+    text-color:                  @active;
+}
+
+element selected.normal {
+    background-color:            @accent;
+    text-color:                  @on-accent;
+}
+
+element selected.urgent {
+    background-color:            @urgent;
+    text-color:                  @fg;
+}
+
+element selected.active {
+    background-color:            @active;
+    text-color:                  @on-accent;
+}
+
+element alternate.normal {
+    background-color:            transparent;
+    text-color:                  @fg;
+}
+
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        30px;
+    cursor:                      inherit;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+message {
+    background-color:            transparent;
+}
+
+textbox {
+    padding:                     14px;
+    border-radius:               10px;
+    background-color:            @bg-2;
+    text-color:                  @fg;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+error-message {
+    padding:                     15px;
+    border-radius:               18px;
+    background-color:            @bg-1;
+    text-color:                  @fg;
+}

@@ -1,0 +1,33 @@
+/*
+ * used by everything rofi related to have the same theme everywhere
+ * imported like this `@import "shared-colors.rasi"`
+ * colors changed here should affect the launcher, wallpaper picker and monitor selector
+ */
+
+* {
+    /* surfaces */
+    bg-0:              #0E0E0E;   /* window backdrop                */
+    bg-1:              #161616;   /* main panels                    */
+    bg-2:              #1F1F1F;   /* inputbar / buttons             */
+    bg-3:              #2A2A2A;   /* hover / subtle raised states   */
+
+    /* text */
+    fg:                #F2F2F2;   /* primary text                   */
+    fg-dim:            #8A8A8A;   /* placeholder / inactive         */
+    fg-faint:          #5A5A5A;   /* hints / disabled               */
+
+    /* accent */
+    accent:            #F088A8;
+    accent-dim:        #99566A;   /* muted accent for borders/idle  */
+    on-accent:         #160B0F;   /* text that sits ON the accent   */
+
+    /* semantic */
+    urgent:            #E2674F;
+    active:            #5DCAA5;
+
+    /* aliases used by the widget rules */
+    background:        @bg-1;
+    background-alt:    @bg-2;
+    foreground:        @fg;
+    selected:          @accent;
+}

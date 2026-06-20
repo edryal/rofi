@@ -1,0 +1,104 @@
+/* yes / no confirmation dialog for the power menu */
+@import "shared-colors.rasi"
+
+configuration {
+    show-icons:                 false;
+
+    kb-remove-char-back:        "BackSpace";
+    kb-mode-complete:           "";
+    kb-row-left:                "Left,Control+h,h,k";
+    kb-row-right:               "Right,Control+l,l,j";
+    kb-element-next:            "";
+    kb-element-prev:            "";
+    kb-accept-entry:            "Return,KP_Enter,Control+m";
+    kb-cancel:                  "Escape,Control+bracketleft";
+    kb-move-char-back:          "";
+    kb-move-char-forward:       "";
+}
+
+* {
+    font:                       "JetBrains Mono Nerd Font 11";
+}
+
+window {
+    transparency:               "real";
+    location:                   center;
+    anchor:                     center;
+    width:                      420px;
+    enabled:                    true;
+    border:                     2px solid;
+    border-color:               @accent-dim;
+    border-radius:              20px;
+    cursor:                     "default";
+    background-color:           @bg-0;
+}
+
+mainbox {
+    enabled:                    true;
+    spacing:                    22px;
+    padding:                    30px;
+    background-color:           transparent;
+    orientation:                vertical;
+    children:                   [ "message", "listview" ];
+}
+
+message {
+    enabled:                    true;
+    background-color:           transparent;
+}
+textbox {
+    background-color:           transparent;
+    text-color:                 @fg;
+    vertical-align:             0.5;
+    horizontal-align:           0.5;
+    font:                       "JetBrains Mono Nerd Font 16";
+}
+
+listview {
+    enabled:                    true;
+    columns:                    2;
+    lines:                      1;
+    cycle:                      true;
+    dynamic:                    true;
+    scrollbar:                  false;
+    layout:                     vertical;
+    fixed-height:               false;
+    fixed-columns:              true;
+
+    spacing:                    16px;
+    background-color:           transparent;
+    cursor:                     "default";
+}
+
+element {
+    enabled:                    true;
+    orientation:                vertical;
+    padding:                    20px 0px;
+    width:                      160px;
+    border:                     2px solid;
+    border-color:               @bg-3;
+    border-radius:              14px;
+    background-color:           @bg-2;
+    text-color:                 @fg-dim;
+    cursor:                     pointer;
+}
+
+element-text {
+    font:                       "JetBrains Mono Nerd Font 26";
+    background-color:           transparent;
+    text-color:                 inherit;
+    cursor:                     inherit;
+    horizontal-align:           0.5;
+    vertical-align:             0.5;
+}
+
+element normal.normal {
+    background-color:           @bg-2;
+    text-color:                 @fg-dim;
+}
+
+element selected.normal {
+    background-color:           @accent;
+    border-color:               @accent;
+    text-color:                 @on-accent;
+}

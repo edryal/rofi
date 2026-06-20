@@ -1,0 +1,132 @@
+/* power menu - used by the powermenu.sh script */
+@import "shared-colors.rasi"
+
+configuration {
+    show-icons:                 false;
+
+    /* vim + arrow navigation */
+    kb-remove-char-back:        "BackSpace";
+    kb-mode-complete:           "";
+    kb-row-left:                "Left,Control+h,h,k";
+    kb-row-right:               "Right,Control+l,l,j";
+    kb-element-next:            "";
+    kb-element-prev:            "";
+    kb-accept-entry:            "Return,KP_Enter,Control+m";
+    kb-cancel:                  "Escape,Control+bracketleft";
+    kb-move-char-back:          "";
+    kb-move-char-forward:       "";
+}
+
+* {
+    font:                       "JetBrains Mono Nerd Font 11";
+}
+
+window {
+    transparency:               "real";
+    location:                   center;
+    anchor:                     center;
+    fullscreen:                 false;
+    width:                      720px;
+    enabled:                    true;
+    border:                     2px solid;
+    border-color:               @accent-dim;
+    border-radius:              20px;
+    cursor:                     "default";
+    background-color:           @bg-0;
+}
+
+mainbox {
+    enabled:                    true;
+    spacing:                    24px;
+    padding:                    34px;
+    background-color:           transparent;
+    orientation:                vertical;
+    children:                   [ "inputbar", "listview", "message" ];
+}
+
+inputbar {
+    enabled:                    true;
+    spacing:                    0px;
+    padding:                    0px;
+    background-color:           transparent;
+    text-color:                 @fg;
+    orientation:                horizontal;
+    children:                   [ "textbox-prompt-colon" ];
+}
+
+textbox-prompt-colon {
+    enabled:                    true;
+    expand:                     true;
+    str:                        "Goodbye";
+    font:                       "JetBrains Mono Nerd Font 22";
+    background-color:           transparent;
+    text-color:                 @fg;
+    horizontal-align:           0.5;
+    vertical-align:             0.5;
+}
+
+listview {
+    enabled:                    true;
+    columns:                    4;
+    lines:                      1;
+    cycle:                      true;
+    dynamic:                    true;
+    scrollbar:                  false;
+    layout:                     vertical;
+    reverse:                    false;
+    fixed-height:               false;
+    fixed-columns:              true;
+
+    spacing:                    16px;
+    background-color:           transparent;
+    cursor:                     "default";
+}
+
+element {
+    enabled:                    true;
+    orientation:                vertical;
+    padding:                    32px 0px;
+    width:                      130px;
+    border:                     2px solid;
+    border-color:               @bg-3;
+    border-radius:              16px;
+    background-color:           @bg-2;
+    text-color:                 @fg-dim;
+    cursor:                     pointer;
+}
+
+element-text {
+    font:                       "JetBrains Mono Nerd Font 30";
+    background-color:           transparent;
+    text-color:                 inherit;
+    cursor:                     inherit;
+    horizontal-align:           0.5;
+    vertical-align:             0.5;
+    expand:                     true;
+}
+
+element selected.normal {
+    background-color:           @accent;
+    border-color:               @accent;
+    text-color:                 @on-accent;
+}
+
+element normal.normal {
+    background-color:           @bg-2;
+    text-color:                 @fg-dim;
+}
+
+message {
+    enabled:                    true;
+    background-color:           transparent;
+}
+
+textbox {
+    padding:                    12px 18px;
+    border-radius:              12px;
+    background-color:           @bg-1;
+    text-color:                 @fg-dim;
+    vertical-align:             0.5;
+    horizontal-align:           0.5;
+    font:                       "JetBrains Mono Nerd Font 10";
+}

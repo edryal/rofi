@@ -1,0 +1,181 @@
+/* wallpaper switcher theme */
+@import "shared-colors.rasi"
+
+configuration {
+    show-icons:                 true;
+
+    kb-mode-complete:           "";
+    kb-remove-to-eol:           "";
+    kb-remove-to-sol:           "";
+    kb-remove-char-forward:     "Delete";   /* free Control+d for page-next */
+    kb-element-next:            "";
+    kb-element-prev:            "";
+    kb-row-tab:                 "";
+    kb-move-char-back:          "";
+    kb-move-char-forward:       "";
+
+    kb-row-up:                  "Up,Control+k";
+    kb-row-down:                "Down,Control+j";
+    kb-row-left:                "Left,Control+h";
+    kb-row-right:               "Right,Control+l";
+    kb-page-prev:               "Page_Up,Control+u";
+    kb-page-next:               "Page_Down,Control+d";
+    kb-row-first:               "Home,Control+g";
+    kb-row-last:                "End";
+    kb-accept-entry:            "Return,KP_Enter,Control+m";
+    kb-remove-char-back:        "BackSpace,Shift+BackSpace";
+    kb-cancel:                  "Escape,Control+bracketleft";
+    kb-clear-line:              "Control+w";
+}
+
+* {
+    font:                       "JetBrains Mono Nerd Font 10";
+}
+
+window {
+    transparency:               "real";
+    location:                   center;
+    anchor:                     center;
+    fullscreen:                 false;
+    width:                      1180px;
+    x-offset:                   0px;
+    y-offset:                   0px;
+
+    enabled:                    true;
+    border:                     2px solid;
+    border-color:               @accent-dim;
+    border-radius:              18px;
+    cursor:                     "default";
+    background-color:           @bg-0;
+}
+
+mainbox {
+    enabled:                    true;
+    spacing:                    16px;
+    padding:                    22px;
+    background-color:           transparent;
+    orientation:                vertical;
+    children:                   [ "inputbar", "message", "listview" ];
+}
+
+inputbar {
+    enabled:                    true;
+    spacing:                    12px;
+    padding:                    15px 18px;
+    border:                     1px solid;
+    border-color:               @bg-3;
+    border-radius:              12px;
+    background-color:           @bg-2;
+    text-color:                 @fg;
+    children:                   [ "textbox-prompt-colon", "entry" ];
+}
+
+textbox-prompt-colon {
+    enabled:                    true;
+    expand:                     false;
+    padding:                    -3px 0px;
+    str:                        "󰥷 ";
+    font:                       "JetBrains Mono Nerd Font 13";
+    background-color:           inherit;
+    text-color:                 @accent;
+}
+entry {
+    enabled:                    true;
+    background-color:           inherit;
+    text-color:                 inherit;
+    cursor:                     text;
+    placeholder:                "Search wallpapers";
+    placeholder-color:          @fg-dim;
+}
+
+listview {
+    enabled:                    true;
+    columns:                    4;
+    lines:                      4;
+    cycle:                      true;
+    dynamic:                    true;
+    scrollbar:                  true;
+    scrollbar-width:            6px;
+    layout:                     horizontal;
+    reverse:                    false;
+    fixed-height:               false;
+    fixed-columns:              true;
+    wrap-around:                true;
+
+    spacing:                    14px;
+    background-color:           transparent;
+    text-color:                 @fg;
+    cursor:                     "default";
+}
+
+scrollbar {
+    background-color:           @bg-2;
+    handle-color:               @accent-dim;
+    handle-width:               6px;
+    handle-rounded-corners:     true;
+    border-radius:              10px;
+}
+
+element {
+    enabled:                    true;
+    orientation:                vertical;
+    spacing:                    8px;
+    padding:                    8px;
+    border:                     2px solid;
+    border-color:               transparent;
+    border-radius:              14px;
+    background-color:           transparent;
+    text-color:                 @fg-dim;
+    cursor:                     pointer;
+}
+
+element normal.normal {
+    background-color:           transparent;
+    text-color:                 @fg-dim;
+}
+
+element selected.normal {
+    background-color:           @bg-2;
+    border-color:               @accent;
+    text-color:                 @fg;
+}
+
+element alternate.normal {
+    background-color:           transparent;
+    text-color:                 @fg-dim;
+}
+
+element-icon {
+    background-color:           transparent;
+    text-color:                 inherit;
+    size:                       250px;
+    border-radius:              10px;
+    cursor:                     inherit;
+}
+
+element-text {
+    background-color:           transparent;
+    text-color:                 inherit;
+    cursor:                     inherit;
+    vertical-align:             0.5;
+    horizontal-align:           0.5;
+    font:                       "JetBrains Mono Nerd Font 9";
+}
+
+message {
+    background-color:           transparent;
+}
+
+textbox {
+    padding:                    14px;
+    border-radius:              10px;
+    background-color:           @bg-2;
+    text-color:                 @fg;
+}
+
+error-message {
+    padding:                    15px;
+    border-radius:              18px;
+    background-color:           @bg-1;
+    text-color:                 @fg;
+}
