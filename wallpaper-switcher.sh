@@ -19,7 +19,7 @@ set -euo pipefail
 # Configure your own variables for themes / transitions
 WALLPAPER_DIR_DEFAULT="$HOME/Wallpapers"
 WALLPAPER_THEME="$HOME/.config/rofi/wallpapers.rasi"
-MONITOR_THEME="$HOME/.config/rofi/style7.rasi"
+MONITOR_THEME="$HOME/.config/rofi/main-theme.rasi"
 AWW_FPS="240"
 
 TRANSITION_TYPE="grow"
