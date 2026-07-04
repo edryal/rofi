@@ -1,1 +1,7 @@
 @theme "/home/catalin/.config/rofi/main-theme.rasi"
+
+configuration {
+    matching:       "fuzzy";
+    sort:           true;
+    sorting-method: "fzf";
+}
