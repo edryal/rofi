@@ -1,35 +1,35 @@
 @import "shared-colors.rasi"
 
 * {
-    font: "JetBrains Mono Nerd Font 10";
+    font: "JetBrains Mono Nerd Font 11.5";
 }
 
 window {
     transparency:     "real";
     location:         center;
     anchor:           center;
-    width:            720px;
-    height:           360px;
+    width:            480px;
     enabled:          true;
     border:           2px solid;
     border-color:     @accent-dim;
     border-radius:    18px;
     cursor:           "default";
-    background-color: @bg-0;
+    background-color: @bg-1;
 }
 
 mainbox {
     enabled:          true;
-    spacing:          0px;
+    spacing:          20px;
+    padding:          26px;
     background-color: transparent;
-    orientation:      horizontal;
-    children:         [ "imagebox", "listbox" ];
+    orientation:      vertical;
+    children:         [ "imagebox", "message", "listview" ];
 }
 
 imagebox {
-    padding:          22px;
-    width:            340px;
-    background-color: transparent;
+    padding:          0px;
+    border-radius:    12px;
+    background-color: @bg-2;
     orientation:      vertical;
     children:         [ "dummy" ];
 }
@@ -38,35 +38,27 @@ dummy {
     background-color: transparent;
 }
 
-listbox {
-    spacing:          18px;
-    padding:          22px;
-    background-color: @bg-1;
-    orientation:      vertical;
-    children:         [ "message", "listview" ];
-}
-
 message {
+    enabled:          true;
     background-color: transparent;
 }
 
 textbox {
-    padding:          14px;
-    border-radius:    10px;
-    background-color: @bg-2;
+    padding:          0px;
+    background-color: transparent;
     text-color:       @fg;
     vertical-align:   0.5;
-    horizontal-align: 0.0;
+    horizontal-align: 0.5;
     markup:           true;
 }
 
 listview {
     enabled:          true;
     columns:          1;
-    lines:            2;
+    lines:            8;
     cycle:            true;
     dynamic:          false;
-    scrollbar:        false;
+    scrollbar:        true;
     layout:           vertical;
     fixed-height:     true;
     fixed-columns:    true;
@@ -76,12 +68,20 @@ listview {
     cursor:           "default";
 }
 
+scrollbar {
+    background-color:        @bg-2;
+    handle-color:            @accent;
+    handle-width:            8px;
+    handle-rounded-corners:  true;
+    border-radius:           10px;
+}
+
 element {
     enabled:          true;
-    spacing:          14px;
-    padding:          14px 16px;
+    spacing:          16px;
+    padding:          15px 18px;
     border:           0px solid;
-    border-radius:    10px;
+    border-radius:    12px;
     background-color: @bg-2;
     text-color:       @fg;
     cursor:           pointer;

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 INPUT_THEME="$HOME/.config/rofi/ytdlp-input.rasi"
 CONFIRM_THEME="$HOME/.config/rofi/ytdlp-confirm.rasi"
 TERMINAL="kitty"
@@ -32,13 +31,11 @@ fi
 thumb_file=$(mktemp /tmp/ytdlp_thumb.XXXXXX.jpg)
 [ -n "$thumb" ] && curl -sL "$thumb" -o "$thumb_file"
 
-pick=$(printf "Best available\n2160p (4K)\n1440p\n1080p\n720p\n480p\n360p\nAudio only\nCancel" |
+pick=$(printf "Best available\n2160p (4K)\n1440p\n1080p\n720p\nAudio only\nCancel" |
     rofi -dmenu \
         -mesg "<b>$title</b>" \
         -theme "$CONFIRM_THEME" \
-        -theme-str "imagebox { background-image: url(\"$thumb_file\", height); }
-                       window { height: 440px; }
-                       listview { lines: 9; }")
+        -theme-str "imagebox { background-image: url(\"$thumb_file\", both); }")
 
 rm -f "$thumb_file"
 [ -z "$pick" ] && exit 0
