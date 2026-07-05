@@ -1,16 +1,14 @@
-/* main launcher (drun/run/filebrowser/window) */
+/* main launcher (drun/run/window) */
 @import "shared-colors.rasi"
 
 configuration {
-    modi:                       "drun,run,filebrowser,window";
+    modi:                       "drun,run,window";
     show-icons:                 true;
     display-drun:               "APPS";
     display-run:                "RUN";
-    display-filebrowser:        "FILES";
     display-window:             "WINDOW";
     drun-display-format:        "{name}";
     window-format:              "{w} · {c} · {t}";
-
     /* clear conflicting defaults */
     kb-mode-complete:           "";          /* was Control+l            */
     kb-remove-to-eol:           "";          /* was Control+k            */
@@ -18,7 +16,6 @@ configuration {
     kb-element-next:            "";          /* was Tab                  */
     kb-element-prev:            "";          /* was ISO_Left_Tab         */
     kb-row-tab:                 "";          /* keep Tab single-purpose  */
-
     /* vim-like bindings */
     kb-row-up:                  "Up,Control+p,Control+k";
     kb-row-down:                "Down,Control+n,Control+j";
@@ -46,10 +43,9 @@ window {
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       1000px;
+    width:                       620px;
     x-offset:                    0px;
-    y-offset:                    0px;
-
+    y-offset:                    240px;
     enabled:                     true;
     border:                      2px solid;
     border-color:                @accent-dim;
@@ -60,32 +56,11 @@ window {
 
 mainbox {
     enabled:                     true;
-    spacing:                     0px;
-    background-color:            transparent;
-    orientation:                 horizontal;
-    children:                    [ "imagebox", "listbox" ];
-}
-
-imagebox {
-    padding:                     22px;
-    background-color:            transparent;
-
-    /* most probably will have to update / improve to something better */
-    background-image:            url("~/.config/rofi/images/portal.png", height);
-    orientation:                 vertical;
-    children:                    [ "inputbar", "dummy", "mode-switcher" ];
-}
-
-listbox {
-    spacing:                     18px;
-    padding:                     22px;
+    spacing:                     14px;
+    padding:                     18px;
     background-color:            @bg-1;
     orientation:                 vertical;
-    children:                    [ "message", "listview" ];
-}
-
-dummy {
-    background-color:            transparent;
+    children:                    [ "inputbar", "mode-switcher", "message", "listview" ];
 }
 
 inputbar {
@@ -120,19 +95,21 @@ entry {
 
 mode-switcher{
     enabled:                     true;
-    spacing:                     14px;
+    orientation:                 horizontal;
+    spacing:                     10px;
     background-color:            transparent;
     text-color:                  @fg;
 }
 
 button {
-    padding:                     14px;
+    padding:                     8px 0px;
     border:                      1px solid;
     border-color:                @bg-3;
-    border-radius:               12px;
+    border-radius:               10px;
     background-color:            @bg-2;
     text-color:                  @fg-dim;
     cursor:                      pointer;
+    horizontal-align:            0.5;
 }
 
 button selected {
@@ -153,7 +130,7 @@ listview {
     reverse:                     false;
     fixed-height:                true;
     fixed-columns:               true;
-    spacing:                     8px;
+    spacing:                     6px;
     background-color:            transparent;
     text-color:                  @fg;
     cursor:                      "default";
@@ -216,7 +193,7 @@ element alternate.normal {
 element-icon {
     background-color:            transparent;
     text-color:                  inherit;
-    size:                        30px;
+    size:                        28px;
     cursor:                      inherit;
 }
 
