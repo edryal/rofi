@@ -35,7 +35,7 @@ pick=$(printf "Best available\n2160p (4K)\n1440p\n1080p\n720p\nAudio only\nCance
     rofi -dmenu \
         -mesg "<b>$title</b>" \
         -theme "$CONFIRM_THEME" \
-        -theme-str "imagebox { background-image: url(\"$thumb_file\", both); }")
+        -theme-str "imagebox { background-image: url(\"$thumb_file\", width); }")
 
 rm -f "$thumb_file"
 [ -z "$pick" ] && exit 0
