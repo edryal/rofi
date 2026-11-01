@@ -47,8 +47,10 @@ case "$chosen" in
     ;;
 "$logout")
     if confirm; then
-        if command -v hyprctl >/dev/null 2>&1; then
-            hyprctl dispatch exit
+        if command -v hyprshutdown >/dev/null 2>&1; then
+            hyprshutdown
+        elif command -v hyprctl >/dev/null 2>&1; then
+            hyprctl dispatch 'hl.dsp.exit()'
         else
             loginctl terminate-user "$USER"
         fi
