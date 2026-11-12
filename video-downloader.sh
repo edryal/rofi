@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 INPUT_THEME="$HOME/.config/rofi/ytdlp-input.rasi"
 CONFIRM_THEME="$HOME/.config/rofi/ytdlp-confirm.rasi"
 TERMINAL="kitty"

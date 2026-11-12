@@ -1,0 +1,26 @@
+@import "main-theme.rasi"
+
+window {
+    y-offset: 0px;
+}
+
+textbox-prompt-colon {
+    str: "󰍹 ";
+}
+
+entry {
+    placeholder: "Share";
+}
+
+listview {
+    lines: 4;
+}
+
+element {
+    padding: 6px 12px;
+}
+
+element-icon {
+    size: 100px;
+    border-radius: 6px;
+}

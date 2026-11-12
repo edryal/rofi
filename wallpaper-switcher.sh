@@ -1,21 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# =============================================================================
-#
-#  awww for static images + transitions
-#  mpvpaper for animated (mp4/gif) wallpapers
-#
+# awww for static images + transitions
+# mpvpaper for animated (mp4/gif) wallpapers
 #   - per-monitor wallpaper picker via rofi (auto-skips on single monitor)
-#   - smooth transitions in BOTH directions (image <-> video)
-#   - persistent per-monitor state, restorable on login with `--restore`
-#
-#  Usage:
-#    wallpaper-switcher.sh [WALLPAPER_DIR]   # interactive picker
-#    wallpaper-switcher.sh --restore         # re-apply saved wallpapers
-# =============================================================================
+#   - smooth transitions (image to image, image to video, video to image, video to video)
+#   - persistent per-monitor, restorable on login with "--restore"
 
-# =============================================================================
+# usage:
+#   - wallpaper-switcher.sh [WALLPAPER_DIR] # interactive picker
+#   - wallpaper-switcher.sh --restore       # re-apply saved wallpapers
+
 # Configure your own variables for themes / transitions
 WALLPAPER_DIR_DEFAULT="$HOME/Wallpapers"
 WALLPAPER_THEME="$HOME/.config/rofi/wallpapers.rasi"
@@ -25,17 +20,13 @@ AWW_FPS="240"
 TRANSITION_TYPE="grow"
 TRANSITION_POS="0.5,0.5"
 TRANSITION_DURATION="1.1"
-# Configure your own variables for themes / transitions
-# =============================================================================
 
-# =============================================================================
 # You most probably don't have to touch these
 STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/wallpaper-switcher"
 mkdir -p "$STATE_DIR"
 
 # safety cap when waiting for mpvpaper to die after pkill
 MPV_KILL_TIMEOUT="2.0"
-# =============================================================================
 
 # Helper functions
 die_please() {
@@ -63,7 +54,7 @@ read_state() {
 }
 
 # capture a frame from video $1 into $2 (at timestamp $3, default 0.2s)
-# 2k resolution by default, change 2560 -> 1920 for 1080p
+# 2k resolution by default, change 2560 to 1920 for 1080p
 capture_frame() {
     local ts="${3:-0.2}"
     ffmpeg -y -loglevel quiet \
@@ -91,9 +82,7 @@ ensure_awww_daemon() {
     fi
 }
 
-# Kill mpvpaper on a monitor and BLOCK until it's truly dead.
-# pkill returns immediately, but a still-alive mpvpaper kept
-# painting over the wallpaper layer and hiding the awww transition
+# kill mpvpaper on a monitor and block until it's truly dead
 kill_mpvpaper() {
     local pattern="mpvpaper $1"
     pgrep -f "$pattern" >/dev/null 2>&1 || return 0
@@ -111,16 +100,16 @@ kill_mpvpaper() {
     done
 }
 
-# Lay down a "from" frame on the wallpaper layer with NO animation, so the
+# lay down a "from" frame on the wallpaper layer with no animation, so the
 # subsequent awww transition has a correct starting image. Used when switching
-# FROM a video to an image
+# from a video to an image
 seed_awww_frame() {
     local monitor="$1" img="$2"
     [[ -f "$img" ]] || return 1
     awww img "$img" --outputs "$monitor" --transition-type none
 }
 
-# Usage: apply_wallpaper <monitor> <full_path> [interactive|restore]
+# usage: apply_wallpaper <monitor> <full_path> [interactive|restore]
 apply_wallpaper() {
     local monitor="$1" full_path="$2" mode="${3:-interactive}"
     local ext="${full_path##*.}"
@@ -149,9 +138,9 @@ apply_wallpaper() {
             awww img "$full_path" --outputs "$monitor" --transition-type none
         else
             if [[ -n "$prev_video" ]]; then
-                # VIDEO -> IMAGE: capture the outgoing video's current frame,
+                # video to image: capture the outgoing video's current frame,
                 # seed it as the "from", then kill the video and grow into the
-                # new image. Order matters: capture & seed BEFORE killing so
+                # new image. Order matters: capture & seed before killing so
                 # there's never a black gap.
                 capture_frame "$prev_video" "$bridge"
                 seed_awww_frame "$monitor" "$bridge" || true
@@ -172,11 +161,11 @@ apply_wallpaper() {
             kill_mpvpaper "$monitor"
             mpvpaper "$monitor" -o "no-audio loop" "$full_path" >/dev/null 2>&1 &
         else
-            # -> VIDEO (from image OR video):
+            # image|video to video
             # 1. capture incoming video's first frame
             # 2. if leaving a video, seed the outgoing frame as the "from"
-            # 3. kill outgoing video, WAIT for it to die
-            # 4. grow current wallpaper -> incoming first frame
+            # 3. kill outgoing video, wait for it to die
+            # 4. grow current wallpaper to incoming first frame
             # 5. once the transition lands, start mpvpaper on top
             capture_frame "$full_path" "$bridge"
 

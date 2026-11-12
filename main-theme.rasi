@@ -45,7 +45,7 @@ window {
     fullscreen:                  false;
     width:                       620px;
     x-offset:                    0px;
-    y-offset:                    240px;
+    y-offset:                    -22px;
     enabled:                     true;
     border:                      2px solid;
     border-color:                @accent-dim;
